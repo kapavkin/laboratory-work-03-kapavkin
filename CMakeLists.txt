@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(laboratory-work-03-kapavkin)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS --coverage)
 
 include(FetchContent)
 FetchContent_Declare(
