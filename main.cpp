@@ -92,19 +92,15 @@ TEST(tree, iterator)
 {
     tree<size_t, int> tr;
 
-    tr.put(0, 1);
-    tr.put(1, 2);
+    tr.put(4, 5);
+    tr.put(3, 4);
     tr.put(2, 3);
-    tr.put(0, 4);
-    tr.put(2, 5);
-    tr.put(4, 6);
-    tr.put(2, 7);
-    tr.put(3, 8);
+    tr.put(1, 2);
+    tr.put(0, 1);
 
     size_t i = 0;
     for (std::pair<size_t, int> it : tr) {
-        ASSERT_EQ(tr[it.first], it.second);
-        i++;
+        ASSERT_EQ(tr[i++], it.second);
     }
 
     ASSERT_EQ(i, tr.size());
