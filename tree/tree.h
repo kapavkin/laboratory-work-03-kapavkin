@@ -292,7 +292,7 @@ class tree {
 
     template <typename it>
     class tree_iterator : public std::iterator<std::input_iterator_tag, it> {
-        size_t _size, _index;
+        size_t _index;
         node** _container;
 
         size_t fill_container(node* pointer, size_t index)
@@ -310,20 +310,18 @@ class tree {
 
     public:
         tree_iterator(node* pointer = nullptr)
-            : _size(tree<K, V>::size(pointer))
-            , _index(0)
+            : _index(0)
             , _container(new node*[tree<K, V>::size(pointer) + 1])
         {
             fill_container(pointer, 0);
-            _container[_size] = nullptr;
+            _container[tree<K, V>::size(pointer)] = nullptr;
         }
 
         tree_iterator(const tree_iterator& other)
-            : _size(other._size)
-            , _index(other._index)
-            , _container(new node*[other._size + 1])
+            : _index(other._index)
+            , _container(new node*[sizeof(other._container) / sizeof(*(other._container))])
         {
-            std::copy(other._container, other._container + _size + 1, _container);
+            std::copy(other._container, other._container + sizeof(other._container) / sizeof(*(other._container)) + 1, _container);
         }
 
         ~tree_iterator()
